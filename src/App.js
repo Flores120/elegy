@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-var call = $.ajax({
-      type: "GET",
-      url: "https://api.spotify.com/v1/browse/featured-playlists",
-      dataType: "JSON"
-});
 class NavBar extends Component {
   render() {
     return (
@@ -19,11 +13,29 @@ class NavBar extends Component {
     );
   }
 }
-class Test extends Component {
+class TopArtist extends Component {
   render() {
+    var apiKey = "fca9515930a01d9ca28257e94bef596b";
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=" + apiKey + "&format=json", false);
+    xhttp.send();
+    var topArtist = JSON.parse(xhttp.responseText);
+    console.log(topArtist.artists.artist[0].name);
+    var artist = [];
+    for (var i = 0; i <= 20; i++) {
+      artist.push(topArtist.artists.artist[i]);
+    }
+    console.log(artist);
+    var showArtist = artist.map((artistDetails, i) =>
+    <div key={"name_" + i}className="col-sm-4 artistDetails">
+      <div id="name"><h2>{artistDetails.name}</h2></div>
+      <div id='artistImage'><img id="img" src={artistDetails.image[3]['#text']} alt="Artist"/></div>
+      <div key={i} id="circle">{artistDetails.i}</div>
+    </div>
+);
     return (
       <div>
-      <h1></h1>
+      {showArtist}
       </div>
     );
   }
@@ -35,8 +47,7 @@ class App extends Component {
       <NavBar></NavBar>
       <div className="header"></div>
         <div className="container">
-          <h1>Hello Worls</h1>
-          <Test />
+          <TopArtist className="topArtistDetails" />
         </div>
       </div>
     );
