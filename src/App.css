@@ -1,44 +1,77 @@
+body {
+  background-color: #252531;
+  color: white;
+}
 nav {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 80px;
-  background-color: black;
-  color: white;
-  z-index: 1;
+  height: 70px;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+}
+nav ul li {
+  float: left;
+  margin: 1em;
+  font-size: 1.4em;
+  list-style-type: none;
+}
+input {
+  color: black;
 }
 h2 {
   font-size: 1.2em;
 }
+h3 {
+  font-size: .9em;
+}
 .header {
   width: 100%;
-  height: 300px;
+  height: 350px;
   background: url('../src/img/bg2.jpg');
   background-position: center;
   background-size: cover;
-  margin-top: 80px;
+  margin-top: 70px;
+  margin-bottom: 15px;
+}
+.artistDetails {
+
 }
 .topArtistDetails {
   width: 100%;
   height: 100%;
 }
+#content {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
 #name {
-  width: 100%;
-  padding: 1px;
-  background-color: #00a5e6;
+  width: 60%;
   color: white;
-  text-align: center;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
-#img {
+#name h2 {
+
+}
+#img  {
   width: 100%;
 }
-#circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #00a5e6;
-  position: relative;
-  bottom: 100px;
-  left: 17%;
+#img:hover {
+  filter: brightness(.2);
 }
+#cirle-img {
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  z-index: 5;
+}
+/*#circle {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+}*/

@@ -13,6 +13,40 @@ class NavBar extends Component {
     );
   }
 }
+class SearchTrack extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <h1>{this.state.value}</h1>
+        <h2>{this.handleSubmit.trackSearch}</h2>
+      </div>
+    );
+  }
+}
+// <div key={i} id="circle"><img id="cirle-img" src={artistDetails.image[3]['#text']} alt="Artist"/></div>
 class TopArtist extends Component {
   render() {
     var apiKey = "fca9515930a01d9ca28257e94bef596b";
@@ -27,10 +61,17 @@ class TopArtist extends Component {
     }
     console.log(artist);
     var showArtist = artist.map((artistDetails, i) =>
-    <div key={"name_" + i}className="col-sm-4 artistDetails">
-      <div id="name"><h2>{artistDetails.name}</h2></div>
-      <div id='artistImage'><img id="img" src={artistDetails.image[3]['#text']} alt="Artist"/></div>
-      <div key={i} id="circle">{artistDetails.i}</div>
+    <div key={"name_" + i} className="col-sm-6 col-md-4 artistDetails">
+      <a href={artistDetails.url} target="_blank">
+        <div id='artistImage'><img id="img" src={artistDetails.image[3]['#text']} alt="Artist"/></div>
+      </a>
+      <div id="content">
+        <div id="name">
+          <h2>{artistDetails.name}</h2>
+          <h3>Streams: {artistDetails.playcount}</h3>
+        </div>
+        <img id="cirle-img" src={artistDetails.image[3]['#text']} alt="Artist"/>
+      </div>
     </div>
 );
     return (
@@ -45,8 +86,11 @@ class App extends Component {
     return (
       <div>
       <NavBar></NavBar>
-      <div className="header"></div>
+      <div className="header">
+      <SearchTrack />
+      </div>
         <div className="container">
+        <h1>Top Artist:</h1>
           <TopArtist className="topArtistDetails" />
         </div>
       </div>
